@@ -1,11 +1,18 @@
 package travel.agency.frontend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import travel.agency.backend.entity.Users;
 import travel.agency.backend.service.UserService;
 
-public class UpdatePasswordController {
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 
+@Named
+@RequestScoped
+public class UpdatePasswordController {
     @Autowired
     private UserService userService;
 
@@ -20,32 +27,12 @@ public class UpdatePasswordController {
 
     private String confirmPassword;
 
-    public boolean getChangePassword(){
+    public boolean getChangePassword() {
         return changePassword;
     }
 
-    public void setChangePassword(boolean changePassword){
+    public void setChangePassword(boolean changePassword) {
         this.changePassword = changePassword;
-    }
-
-    public UserService getUserService() {
-        return userService;
-    }
-
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
-
-    public PasswordEncoder getPasswordEncoder() {
-        return passwordEncoder;
-    }
-
-    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
-    }
-
-    public boolean isChangePassword() {
-        return changePassword;
     }
 
     public String getPreviousPassword() {
@@ -70,5 +57,23 @@ public class UpdatePasswordController {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    private UserDetails getUserDetails() {
+        return (UserDetails) SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getPrincipal();
+    }
+
+    public String changePassword() {
+        Users user = userService.findUserByUserName(getUserDetails().getUsername());
+
+        if (!passwordEncoder.matches(previousPassword, user.getHashedPassword()) || !password.equals(confirmPassword)) {
+            return "/profile.jsf?faces-redirect=true&includeViewParams=true&error=true";
+        }
+
+        userService.updatePassword(user.getUserID(), password);
+
+        return "/profile.jsf?faces-redirect=true";
     }
 }

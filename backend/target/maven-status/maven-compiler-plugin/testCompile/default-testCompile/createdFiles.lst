@@ -1,0 +1,6 @@
+travel\agency\backend\service\UserServiceTest.class
+travel\agency\backend\service\DefaultDataInitializerServiceTest.class
+travel\agency\backend\TestApplication.class
+travel\agency\backend\service\ServiceTestBase.class
+travel\agency\backend\service\TripServiceTest.class
+travel\agency\backend\service\ResetService.class

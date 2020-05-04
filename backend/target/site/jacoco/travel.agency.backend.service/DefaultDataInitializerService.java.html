@@ -25,143 +25,147 @@ import java.util.function.Supplier;
 <span class="fc" id="L25">        String secondUser = &quot;foo&quot;;</span>
 <span class="fc" id="L26">        String thirdUser = &quot;bar&quot;;</span>
 
-<span class="fc" id="L28">        attempt(() -&gt; userService.createUser(</span>
-                firstUser, firstUser, &quot;admin-last-name&quot;, &quot;123&quot;, &quot;admin@email.com&quot;, &quot;admin&quot;));
-
-<span class="fc" id="L31">        attempt(() -&gt; userService.createUser(</span>
-                secondUser, secondUser, &quot;foo-last-name&quot;, &quot;123&quot;, &quot;foo@email.com&quot;, &quot;user&quot;));
-
-<span class="fc" id="L34">        attempt(() -&gt; userService.createUser(</span>
-                thirdUser, thirdUser, &quot;bar-last-name&quot;, &quot;123&quot;, &quot;bar@email.com&quot;, &quot;user&quot;));
+<span class="fc" id="L28">        attempt(() -&gt; {</span>
+<span class="fc" id="L29">            return userService.createUser(</span>
+                    firstUser, firstUser, &quot;admin-last-name&quot;, &quot;123&quot;, &quot;admin@email.com&quot;, &quot;admin&quot;);
+        });
+<span class="fc" id="L32">        attempt(() -&gt; {</span>
+<span class="fc" id="L33">            return userService.createUser(</span>
+                    secondUser, secondUser, &quot;foo-last-name&quot;, &quot;123&quot;, &quot;foo@email.com&quot;, &quot;user&quot;);
+        });
+<span class="fc" id="L36">        attempt(() -&gt; {</span>
+<span class="fc" id="L37">            return userService.createUser(</span>
+                    thirdUser, thirdUser, &quot;bar-last-name&quot;, &quot;123&quot;, &quot;bar@email.com&quot;, &quot;user&quot;);
+        });
 
         //Create some trips to purchase
-<span class="fc" id="L38">        Long bosnianTrip = attempt(() -&gt;</span>
-<span class="fc" id="L39">                tripService.createTrip(</span>
-                        &quot;Trip to bosnia&quot;,
+<span class="fc" id="L42">        Long bosnianTrip = attempt(() -&gt;</span>
+<span class="fc" id="L43">                tripService.createTrip(</span>
+                        &quot;bosnia&quot;,
                         &quot;This is awesome trip to small country of Bosnia&quot;,
-<span class="fc" id="L42">                        3000L,</span>
+<span class="fc" id="L46">                        3000L,</span>
                         &quot;Mostar&quot;,
-<span class="fc" id="L44">                        LocalDate.now(),</span>
-<span class="fc" id="L45">                        LocalDate.of(2020, 6, 6))</span>
+<span class="fc" id="L48">                        LocalDate.now(),</span>
+<span class="fc" id="L49">                        LocalDate.of(2020, 6, 6))</span>
         );
-<span class="fc" id="L47">        Long norwegianTrip = attempt(() -&gt;</span>
-<span class="fc" id="L48">                tripService.createTrip(</span>
-                        &quot;Trip to Norway&quot;,
+<span class="fc" id="L51">        Long norwegianTrip = attempt(() -&gt;</span>
+<span class="fc" id="L52">                tripService.createTrip(</span>
+                        &quot;Norway&quot;,
                         &quot;Trip to Svalbard, one amazing place in Norway&quot;,
-<span class="fc" id="L51">                        5000L,</span>
+<span class="fc" id="L55">                        5000L,</span>
                         &quot;Svalbard&quot;,
-<span class="fc" id="L53">                        LocalDate.now(),</span>
-<span class="fc" id="L54">                        LocalDate.of(2020, 9, 26))</span>
+<span class="fc" id="L57">                        LocalDate.now(),</span>
+<span class="fc" id="L58">                        LocalDate.of(2020, 9, 26))</span>
         );
-<span class="fc" id="L56">        Long italianTrip = attempt(() -&gt;</span>
-<span class="fc" id="L57">                tripService.createTrip(</span>
-                        &quot;Trip to Italy&quot;,
+<span class="fc" id="L60">        Long italianTrip = attempt(() -&gt;</span>
+<span class="fc" id="L61">                tripService.createTrip(</span>
+                        &quot;Italy&quot;,
                         &quot;Visit Pisa, not only famous for leaning tower&quot;,
-<span class="fc" id="L60">                        3200L,</span>
+<span class="fc" id="L64">                        3200L,</span>
                         &quot;Pisa&quot;,
-<span class="fc" id="L62">                        LocalDate.now(),</span>
-<span class="fc" id="L63">                        LocalDate.of(2020, 9, 26))</span>
+<span class="fc" id="L66">                        LocalDate.now(),</span>
+<span class="fc" id="L67">                        LocalDate.of(2020, 9, 26))</span>
         );
-<span class="fc" id="L65">        Long secondItalianTrip = attempt(() -&gt;</span>
-<span class="fc" id="L66">                tripService.createTrip(</span>
-                        &quot;Trip to Italy&quot;,
+<span class="fc" id="L69">        Long secondItalianTrip = attempt(() -&gt;</span>
+<span class="fc" id="L70">                tripService.createTrip(</span>
+                        &quot;Italy&quot;,
                         &quot;Visit Rome, city of AS Roma, Colosseum and many other things&quot;,
-<span class="fc" id="L69">                        4000L,</span>
+<span class="fc" id="L73">                        4000L,</span>
                         &quot;Rome&quot;,
-<span class="fc" id="L71">                        LocalDate.of(2021, 2, 22),</span>
-<span class="fc" id="L72">                        LocalDate.of(2021, 3, 2))</span>
+<span class="fc" id="L75">                        LocalDate.of(2021, 2, 22),</span>
+<span class="fc" id="L76">                        LocalDate.of(2021, 3, 2))</span>
         );
-<span class="fc" id="L74">        Long usaTrip = attempt(() -&gt;</span>
-<span class="fc" id="L75">                tripService.createTrip(</span>
-                        &quot;Trip to USA&quot;,
+<span class="fc" id="L78">        Long usaTrip = attempt(() -&gt;</span>
+<span class="fc" id="L79">                tripService.createTrip(</span>
+                        &quot;USA&quot;,
                         &quot;Visit New York, the big apple, city that never sleeps&quot;,
-<span class="fc" id="L78">                        5000L,</span>
+<span class="fc" id="L82">                        5000L,</span>
                         &quot;New York&quot;,
-<span class="fc" id="L80">                        LocalDate.of(2021, 2, 22),</span>
-<span class="fc" id="L81">                        LocalDate.of(2021, 3, 2))</span>
+<span class="fc" id="L84">                        LocalDate.of(2021, 2, 22),</span>
+<span class="fc" id="L85">                        LocalDate.of(2021, 3, 2))</span>
         );
-<span class="fc" id="L83">        Long germanTrip = attempt(() -&gt;</span>
-<span class="fc" id="L84">                tripService.createTrip(</span>
-                        &quot;Trip to Germany&quot;,
+<span class="fc" id="L87">        Long germanTrip = attempt(() -&gt;</span>
+<span class="fc" id="L88">                tripService.createTrip(</span>
+                        &quot;Germany&quot;,
                         &quot;Visit Munich, city of FC Bayern&quot;,
-<span class="fc" id="L87">                        4000L,</span>
+<span class="fc" id="L91">                        4000L,</span>
                         &quot;Munich&quot;,
-<span class="fc" id="L89">                        LocalDate.of(2021, 2, 22),</span>
-<span class="fc" id="L90">                        LocalDate.of(2021, 3, 2))</span>
+<span class="fc" id="L93">                        LocalDate.of(2021, 2, 22),</span>
+<span class="fc" id="L94">                        LocalDate.of(2021, 3, 2))</span>
         );
 
         //******************************************************************'
         //******************************************************************'
         //******************************************************************'
 
-<span class="fc" id="L97">        Long secondGermanTrip = attempt(() -&gt;</span>
-<span class="fc" id="L98">                tripService.createTrip(</span>
-                        &quot;Trip to Germany&quot;,
+<span class="fc" id="L101">        Long secondGermanTrip = attempt(() -&gt;</span>
+<span class="fc" id="L102">                tripService.createTrip(</span>
+                        &quot;Germany&quot;,
                         &quot;Germany's capital, dates to the 13th century&quot;,
-<span class="fc" id="L101">                        4000L,</span>
+<span class="fc" id="L105">                        4000L,</span>
                         &quot;Berlin&quot;,
-<span class="fc" id="L103">                        LocalDate.of(2021, 2, 22),</span>
-<span class="fc" id="L104">                        LocalDate.of(2021, 3, 2))</span>
+<span class="fc" id="L107">                        LocalDate.of(2021, 2, 22),</span>
+<span class="fc" id="L108">                        LocalDate.of(2021, 3, 2))</span>
         );
 
-<span class="fc" id="L107">        Long danishTrip = attempt(() -&gt;</span>
-<span class="fc" id="L108">                tripService.createTrip(</span>
-                        &quot;Trip to Denmark&quot;,
+<span class="fc" id="L111">        Long danishTrip = attempt(() -&gt;</span>
+<span class="fc" id="L112">                tripService.createTrip(</span>
+                        &quot;Denmark&quot;,
                         &quot;Denmark's capital&quot;,
-<span class="fc" id="L111">                        4000L,</span>
+<span class="fc" id="L115">                        4000L,</span>
                         &quot;Munich&quot;,
-<span class="fc" id="L113">                        LocalDate.of(2021, 2, 22),</span>
-<span class="fc" id="L114">                        LocalDate.of(2021, 3, 2))</span>
+<span class="fc" id="L117">                        LocalDate.of(2021, 2, 22),</span>
+<span class="fc" id="L118">                        LocalDate.of(2021, 3, 2))</span>
         );
 
-<span class="fc" id="L117">        Long englandTrip = attempt(() -&gt;</span>
-<span class="fc" id="L118">                tripService.createTrip(</span>
-                        &quot;Trip to England&quot;,
+<span class="fc" id="L121">        Long englandTrip = attempt(() -&gt;</span>
+<span class="fc" id="L122">                tripService.createTrip(</span>
+                        &quot;England&quot;,
                         &quot;the capital of England and the United Kingdom&quot;,
-<span class="fc" id="L121">                        5000L,</span>
+<span class="fc" id="L125">                        5000L,</span>
                         &quot;London&quot;,
-<span class="fc" id="L123">                        LocalDate.of(2021, 2, 22),</span>
-<span class="fc" id="L124">                        LocalDate.of(2021, 3, 2))</span>
+<span class="fc" id="L127">                        LocalDate.of(2021, 2, 22),</span>
+<span class="fc" id="L128">                        LocalDate.of(2021, 3, 2))</span>
         );
 
-<span class="fc" id="L127">        Long secondEnglandTrip = attempt(() -&gt;</span>
-<span class="fc" id="L128">                tripService.createTrip(</span>
+<span class="fc" id="L131">        Long secondEnglandTrip = attempt(() -&gt;</span>
+<span class="fc" id="L132">                tripService.createTrip(</span>
                         &quot;Trip to England&quot;,
                         &quot;Birmingham is a major city in England's west midlands region&quot;,
-<span class="fc" id="L131">                        5500L,</span>
+<span class="fc" id="L135">                        5500L,</span>
                         &quot;Birmingham&quot;,
-<span class="fc" id="L133">                        LocalDate.of(2021, 2, 22),</span>
-<span class="fc" id="L134">                        LocalDate.of(2021, 3, 2))</span>
+<span class="fc" id="L137">                        LocalDate.of(2021, 2, 22),</span>
+<span class="fc" id="L138">                        LocalDate.of(2021, 3, 2))</span>
         );
 
-<span class="fc" id="L137">        Long theadEnglandTrip = attempt(() -&gt;</span>
-<span class="fc" id="L138">                tripService.createTrip(</span>
-                        &quot;Trip to England&quot;,
+<span class="fc" id="L141">        Long theadEnglandTrip = attempt(() -&gt;</span>
+<span class="fc" id="L142">                tripService.createTrip(</span>
+                        &quot;England&quot;,
                         &quot;Hereford is a cathedral city&quot;,
-<span class="fc" id="L141">                        5500L,</span>
+<span class="fc" id="L145">                        5500L,</span>
                         &quot;Hereford&quot;,
-<span class="fc" id="L143">                        LocalDate.of(2022, 5, 22),</span>
-<span class="fc" id="L144">                        LocalDate.of(2022, 7, 2))</span>
+<span class="fc" id="L147">                        LocalDate.of(2022, 5, 22),</span>
+<span class="fc" id="L148">                        LocalDate.of(2022, 7, 2))</span>
         );
 
-<span class="fc" id="L147">        Long austriaTrip = attempt(() -&gt;</span>
-<span class="fc" id="L148">                tripService.createTrip(</span>
-                        &quot;Trip to Austria&quot;,
+<span class="fc" id="L151">        Long austriaTrip = attempt(() -&gt;</span>
+<span class="fc" id="L152">                tripService.createTrip(</span>
+                        &quot;Austria&quot;,
                         &quot;Austria's capital. lies in the country east on the Danube River&quot;,
-<span class="fc" id="L151">                        6000L,</span>
+<span class="fc" id="L155">                        6000L,</span>
                         &quot;Vienna&quot;,
-<span class="fc" id="L153">                        LocalDate.of(2021, 2, 22),</span>
-<span class="fc" id="L154">                        LocalDate.of(2021, 3, 2))</span>
+<span class="fc" id="L157">                        LocalDate.of(2021, 2, 22),</span>
+<span class="fc" id="L158">                        LocalDate.of(2021, 3, 2))</span>
         );
 
-<span class="fc" id="L157">        Long secondAustriaTrip = attempt(() -&gt;</span>
-<span class="fc" id="L158">                tripService.createTrip(</span>
-                        &quot;Trip to Austria&quot;,
+<span class="fc" id="L161">        Long secondAustriaTrip = attempt(() -&gt;</span>
+<span class="fc" id="L162">                tripService.createTrip(</span>
+                        &quot;Austria&quot;,
                         &quot;Graz is the Capital of the southem Austrian province of Syria&quot;,
-<span class="fc" id="L161">                        6000L,</span>
+<span class="fc" id="L165">                        6000L,</span>
                         &quot;Graz&quot;,
-<span class="fc" id="L163">                        LocalDate.of(2021, 2, 22),</span>
-<span class="fc" id="L164">                        LocalDate.of(2021, 3, 2))</span>
+<span class="fc" id="L167">                        LocalDate.of(2021, 2, 22),</span>
+<span class="fc" id="L168">                        LocalDate.of(2021, 3, 2))</span>
         );
 
 
@@ -172,27 +176,27 @@ import java.util.function.Supplier;
 
         //Okay, lets start purchasing
         //Bosnian trip
-<span class="fc" id="L175">        purchaseService.newPurchase(bosnianTrip,firstUser);</span>
-<span class="fc" id="L176">        purchaseService.newPurchase(bosnianTrip,thirdUser);</span>
+<span class="fc" id="L179">        purchaseService.newPurchase(bosnianTrip,firstUser);</span>
+<span class="fc" id="L180">        purchaseService.newPurchase(bosnianTrip,thirdUser);</span>
         //Norwegian trip
-<span class="fc" id="L178">        purchaseService.newPurchase(norwegianTrip,secondUser);</span>
-<span class="fc" id="L179">        purchaseService.newPurchase(norwegianTrip,thirdUser);</span>
+<span class="fc" id="L182">        purchaseService.newPurchase(norwegianTrip,secondUser);</span>
+<span class="fc" id="L183">        purchaseService.newPurchase(norwegianTrip,thirdUser);</span>
         //First Italian trip
-<span class="fc" id="L181">        purchaseService.newPurchase(italianTrip,firstUser);</span>
-<span class="fc" id="L182">        purchaseService.newPurchase(italianTrip,secondUser);</span>
-<span class="fc" id="L183">        purchaseService.newPurchase(italianTrip,thirdUser);</span>
+<span class="fc" id="L185">        purchaseService.newPurchase(italianTrip,firstUser);</span>
+<span class="fc" id="L186">        purchaseService.newPurchase(italianTrip,secondUser);</span>
+<span class="fc" id="L187">        purchaseService.newPurchase(italianTrip,thirdUser);</span>
         //Second italian trip
-<span class="fc" id="L185">        purchaseService.newPurchase(secondItalianTrip, secondUser);</span>
+<span class="fc" id="L189">        purchaseService.newPurchase(secondItalianTrip, secondUser);</span>
         //German trip
-<span class="fc" id="L187">        purchaseService.newPurchase(secondItalianTrip, secondUser);</span>
+<span class="fc" id="L191">        purchaseService.newPurchase(secondItalianTrip, secondUser);</span>
 
-<span class="fc" id="L189">    }</span>
+<span class="fc" id="L193">    }</span>
 
     private &lt;T&gt; T attempt(Supplier&lt;T&gt; lambda) {
         try {
-<span class="fc" id="L193">            return lambda.get();</span>
-<span class="nc" id="L194">        } catch (Exception e) {</span>
-<span class="nc" id="L195">            return null;</span>
+<span class="fc" id="L197">            return lambda.get();</span>
+<span class="nc" id="L198">        } catch (Exception e) {</span>
+<span class="nc" id="L199">            return null;</span>
         }
     }
 }

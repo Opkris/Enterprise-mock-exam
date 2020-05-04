@@ -49,4 +49,11 @@ public class UserService {
         users.getBookedTrips().size();
         return users;
     }
+
+    public void updatePassword(String userId, String password) {
+        Users user = em.find(Users.class, userId);
+        user.setHashedPassword(passwordEncoder.encode(password));
+    }
+
 }
+

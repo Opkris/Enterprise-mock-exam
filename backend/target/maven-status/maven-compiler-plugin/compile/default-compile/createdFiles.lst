@@ -1,0 +1,8 @@
+travel\agency\backend\entity\Trip.class
+travel\agency\backend\service\DefaultDataInitializerService.class
+travel\agency\backend\service\TripService.class
+travel\agency\backend\PasswordConfig.class
+travel\agency\backend\service\PurchaseService.class
+travel\agency\backend\service\UserService.class
+travel\agency\backend\entity\Users.class
+travel\agency\backend\entity\Purchase.class

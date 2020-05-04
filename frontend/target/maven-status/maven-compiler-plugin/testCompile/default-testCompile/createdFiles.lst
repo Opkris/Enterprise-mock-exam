@@ -1,0 +1,9 @@
+travel\agency\selenium\po\SignUpPO.class
+travel\agency\selenium\PageObject.class
+travel\agency\selenium\SeleniumLocalIT.class
+travel\agency\LocalApplicationRunner.class
+travel\agency\selenium\po\LayoutPO.class
+travel\agency\selenium\po\DetailsPO.class
+travel\agency\selenium\SeleniumDriverHandler.class
+travel\agency\selenium\po\UserPO.class
+travel\agency\selenium\po\IndexPO.class
