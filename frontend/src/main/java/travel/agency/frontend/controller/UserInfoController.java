@@ -20,6 +20,7 @@ import java.util.List;
 @RequestScoped
 public class UserInfoController {
 
+
     @Autowired
     private PurchaseService purchaseService;
 
@@ -37,4 +38,7 @@ public class UserInfoController {
     public List<Purchase> listPurchases() {
         return purchaseService.filterPurchasesByUser(getUserName());
     }
+
+
+
 }

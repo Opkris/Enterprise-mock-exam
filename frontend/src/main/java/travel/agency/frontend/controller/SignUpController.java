@@ -26,13 +26,18 @@ public class SignUpController {
 
     private String username;
 
+    private String firstName;
+
+    private String lastName;
+
     private String password;
 
     public String signUpUser(){
 
         boolean registered = false;
         try {
-            registered = userService.createUser(username, username,username+"last",password,username+"@mail.com","user");
+//            registered = userService.createUser(username, username,username+"last",password,username+"@mail.com","user");
+            registered = userService.createUser(username, firstName, lastName,password,username+"@mail.com","user");
         }catch (Exception e){
             //nothing to do
         }
@@ -71,5 +76,21 @@ public class SignUpController {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }

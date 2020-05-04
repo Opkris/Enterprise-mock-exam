@@ -25,19 +25,23 @@ public class DefaultDataInitializerService {
         String secondUser = "foo";
         String thirdUser = "bar";
 
-        attempt(() -> userService.createUser(
-                firstUser, firstUser, "admin-last-name", "123", "admin@email.com", "admin"));
-
-        attempt(() -> userService.createUser(
-                secondUser, secondUser, "foo-last-name", "123", "foo@email.com", "user"));
-
-        attempt(() -> userService.createUser(
-                thirdUser, thirdUser, "bar-last-name", "123", "bar@email.com", "user"));
+        attempt(() -> {
+            return userService.createUser(
+                    firstUser, firstUser, "admin-last-name", "123", "admin@email.com", "admin");
+        });
+        attempt(() -> {
+            return userService.createUser(
+                    secondUser, secondUser, "foo-last-name", "123", "foo@email.com", "user");
+        });
+        attempt(() -> {
+            return userService.createUser(
+                    thirdUser, thirdUser, "bar-last-name", "123", "bar@email.com", "user");
+        });
 
         //Create some trips to purchase
         Long bosnianTrip = attempt(() ->
                 tripService.createTrip(
-                        "Trip to bosnia",
+                        "bosnia",
                         "This is awesome trip to small country of Bosnia",
                         3000L,
                         "Mostar",
@@ -46,7 +50,7 @@ public class DefaultDataInitializerService {
         );
         Long norwegianTrip = attempt(() ->
                 tripService.createTrip(
-                        "Trip to Norway",
+                        "Norway",
                         "Trip to Svalbard, one amazing place in Norway",
                         5000L,
                         "Svalbard",
@@ -55,7 +59,7 @@ public class DefaultDataInitializerService {
         );
         Long italianTrip = attempt(() ->
                 tripService.createTrip(
-                        "Trip to Italy",
+                        "Italy",
                         "Visit Pisa, not only famous for leaning tower",
                         3200L,
                         "Pisa",
@@ -64,7 +68,7 @@ public class DefaultDataInitializerService {
         );
         Long secondItalianTrip = attempt(() ->
                 tripService.createTrip(
-                        "Trip to Italy",
+                        "Italy",
                         "Visit Rome, city of AS Roma, Colosseum and many other things",
                         4000L,
                         "Rome",
@@ -73,7 +77,7 @@ public class DefaultDataInitializerService {
         );
         Long usaTrip = attempt(() ->
                 tripService.createTrip(
-                        "Trip to USA",
+                        "USA",
                         "Visit New York, the big apple, city that never sleeps",
                         5000L,
                         "New York",
@@ -82,7 +86,7 @@ public class DefaultDataInitializerService {
         );
         Long germanTrip = attempt(() ->
                 tripService.createTrip(
-                        "Trip to Germany",
+                        "Germany",
                         "Visit Munich, city of FC Bayern",
                         4000L,
                         "Munich",
@@ -96,7 +100,7 @@ public class DefaultDataInitializerService {
 
         Long secondGermanTrip = attempt(() ->
                 tripService.createTrip(
-                        "Trip to Germany",
+                        "Germany",
                         "Germany's capital, dates to the 13th century",
                         4000L,
                         "Berlin",
@@ -106,7 +110,7 @@ public class DefaultDataInitializerService {
 
         Long danishTrip = attempt(() ->
                 tripService.createTrip(
-                        "Trip to Denmark",
+                        "Denmark",
                         "Denmark's capital",
                         4000L,
                         "Munich",
@@ -116,7 +120,7 @@ public class DefaultDataInitializerService {
 
         Long englandTrip = attempt(() ->
                 tripService.createTrip(
-                        "Trip to England",
+                        "England",
                         "the capital of England and the United Kingdom",
                         5000L,
                         "London",
@@ -136,7 +140,7 @@ public class DefaultDataInitializerService {
 
         Long theadEnglandTrip = attempt(() ->
                 tripService.createTrip(
-                        "Trip to England",
+                        "England",
                         "Hereford is a cathedral city",
                         5500L,
                         "Hereford",
@@ -146,7 +150,7 @@ public class DefaultDataInitializerService {
 
         Long austriaTrip = attempt(() ->
                 tripService.createTrip(
-                        "Trip to Austria",
+                        "Austria",
                         "Austria's capital. lies in the country east on the Danube River",
                         6000L,
                         "Vienna",
@@ -156,7 +160,7 @@ public class DefaultDataInitializerService {
 
         Long secondAustriaTrip = attempt(() ->
                 tripService.createTrip(
-                        "Trip to Austria",
+                        "Austria",
                         "Graz is the Capital of the southem Austrian province of Syria",
                         6000L,
                         "Graz",

@@ -50,7 +50,7 @@
                     <h:outputLabel>Return date: #{trip.returnDate}</h:outputLabel>
 
                     <div class="userInfoTable">
-                        <p class="alert alert-dark">Users taking this trip</p>
+                        <p class="alert alert-dark">Users taking this trip:</p>
                         <h:dataTable styleClass="table table-hover" value="#{trip.allTravelers}"
                                      var="users" border="1" id="tripTable">
                             <h:column>
