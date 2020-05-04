@@ -20,7 +20,7 @@
         <sec:authenticated>
             <h:form prependId="false" id="bookingForm"
                     rendered="#{travelController.isNotPurchased(trip.id,userInfoController.userName)}">
-                <h:commandButton value="Book the trip"
+                <h:commandButton value="Book the trip" class="btn  p-1 m-3 btn-outline-success"
                                  action="#{travelController.makePurchase(userInfoController.userName)}"
                                  id="bookingBtn"/>
             </h:form>

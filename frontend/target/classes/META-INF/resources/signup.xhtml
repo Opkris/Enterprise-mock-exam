@@ -19,14 +19,14 @@
                 <h:outputLabel value="User and/or password are wrong."
                                rendered="${!empty param['error']}"/>
 
-                <h:outputText value="Username: "/>
+                <h:outputText value="UserName: "/>
                 <h:inputText id="username" value="#{signUpController.username}" class="login"/><br/>
 
                 <h:outputText value="FirstName: "/>
                 <h:inputText id="firstName" value="#{signUpController.firstName}" class="login"/><br/>
 
 
-                <h:outputText value="LastName: "/>
+                <h:outputText value="Last Name: "/>
                 <h:inputText id="lastName" value="#{signUpController.lastName}" class="login"/><br/>
 
                 <h:outputText value="Password: "/>

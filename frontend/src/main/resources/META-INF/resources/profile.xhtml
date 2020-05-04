@@ -7,7 +7,7 @@
     <f:metadata>
         <f:viewParam name="changePassword" value="#{updatePasswordController.changePassword}"/>
     </f:metadata>
-<!--    @elvariable id="user" type="no.asmadsen.exam.entity.User"-->
+    <!--    @elvariable id="user" type="no.asmadsen.exam.entity.User"-->
     <ui:param name="user" value="#{userInfoController.user}"/>
     <ui:define name="title">Profile</ui:define>
     <ui:define name="content">
@@ -57,6 +57,22 @@
                         </h:commandButton>
                     </h:form>
                 </c:if>
+                <c:set var = "users" value="#{userInfoController.user}"/>
+                <h:dataTable styleClass="table table-hover" value="#{users.bookedTrips}"
+                             var="trip" border="1" id="tripTable">
+                    <h:column>
+                        <f:facet name="header">Contry</f:facet>
+                        <h:outputText value="#{trip.title}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Description</f:facet>
+                        <h:outputText value="#{trip.description}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Location</f:facet>
+                        <h:outputText value="#{trip.locationName}"/>
+                    </h:column>
+                </h:dataTable>
             </div>
         </div>
     </ui:define>

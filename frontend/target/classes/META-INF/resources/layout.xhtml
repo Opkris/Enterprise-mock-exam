@@ -19,7 +19,7 @@
 <sec:authenticated>
     <a id="logoutBtn" class="btn  p-1 m-3 btn-outline-danger" href="/logout">Logout</a>
     <a id="profileBtn" class="btn p-1 m-3 btn-outline-danger" href="/profile.xhtml">Profile</a>
-    <h:outputLabel>Welcome: </h:outputLabel><h:link class="btn  p-1 m-3 btn-outline-success"  id="userID" outcome="user" value="#{userInfoController.userName}"/>
+    <h:outputLabel>Welcome: </h:outputLabel><h:link outcome="profile" value="#{userInfoController.userName}"/>
 </sec:authenticated>
 
 <sec:anonymous>
