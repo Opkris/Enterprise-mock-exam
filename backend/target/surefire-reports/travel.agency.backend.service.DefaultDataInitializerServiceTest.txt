@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: travel.agency.backend.service.DefaultDataInitializerServiceTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.582 s - in travel.agency.backend.service.DefaultDataInitializerServiceTest

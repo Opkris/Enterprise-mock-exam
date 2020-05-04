@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="no"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Purchase.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mock-exam-backend</a> &gt; <a href="index.source.html" class="el_package">travel.agency.backend.entity</a> &gt; <span class="el_source">Purchase.java</span></div><h1>Purchase.java</h1><pre class="source lang-java linenums">package travel.agency.backend.entity;
+
+//Purchase: having info like which user booked which trip, and when.
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
+
+@Entity
+public class Purchase {
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @OneToOne//One purchase is connected to one user
+    @NotNull
+    private Users bookedBy;
+
+    @NotNull
+    private LocalDate dateOfBooking;
+
+    //To know which trips this Purchase is referring to we have to have information about it
+    //Although user has information about is own trips it could be that user booked multiple flights on same day
+    //As for that we have to distinguish between those having special field trip
+    //One trip can have many purchases/bookings and one booking is related to only one trip
+    @ManyToOne
+    @NotNull
+    private Trip tripInformation;
+
+<span class="fc" id="L30">    public Purchase() {</span>
+<span class="fc" id="L31">    }</span>
+
+    public Long getId() {
+<span class="fc" id="L34">        return id;</span>
+    }
+
+    public void setId(Long id) {
+<span class="nc" id="L38">        this.id = id;</span>
+<span class="nc" id="L39">    }</span>
+
+    public Users getBookedBy() {
+<span class="nc" id="L42">        return bookedBy;</span>
+    }
+
+    public void setBookedBy(Users bookedBy) {
+<span class="fc" id="L46">        this.bookedBy = bookedBy;</span>
+<span class="fc" id="L47">    }</span>
+
+    public LocalDate getDateOfBooking() {
+<span class="nc" id="L50">        return dateOfBooking;</span>
+    }
+
+    public void setDateOfBooking(LocalDate dateOfBooking) {
+<span class="fc" id="L54">        this.dateOfBooking = dateOfBooking;</span>
+<span class="fc" id="L55">    }</span>
+
+    public Trip getTripInformation() {
+<span class="nc" id="L58">        return tripInformation;</span>
+    }
+
+    public void setTripInformation(Trip tripInformation) {
+<span class="fc" id="L62">        this.tripInformation = tripInformation;</span>
+<span class="fc" id="L63">    }</span>
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

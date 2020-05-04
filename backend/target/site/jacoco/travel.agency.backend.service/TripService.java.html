@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="no"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TripService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mock-exam-backend</a> &gt; <a href="index.source.html" class="el_package">travel.agency.backend.service</a> &gt; <span class="el_source">TripService.java</span></div><h1>TripService.java</h1><pre class="source lang-java linenums">package travel.agency.backend.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import travel.agency.backend.entity.Trip;
+
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import java.time.LocalDate;
+import java.util.List;
+
+@Service
+@Transactional
+<span class="fc" id="L15">public class TripService {</span>
+
+    @Autowired
+    private EntityManager em;
+
+    public List&lt;Trip&gt; getAllTrips(Boolean withTravelers) {
+<span class="fc" id="L21">        TypedQuery&lt;Trip&gt; query = em.createQuery(</span>
+                &quot;SELECT t FROM Trip t ORDER BY t.cost ASC&quot;, Trip.class
+        );
+<span class="fc" id="L24">        List&lt;Trip&gt; allTrips = query.getResultList();</span>
+
+        //If we ant to load all users taking this trip we need to bypass lazy fetching by using .size on list
+        //Using only getAllTravelers is not enough
+<span class="fc bfc" id="L28" title="All 2 branches covered.">        if (withTravelers) {</span>
+<span class="fc" id="L29">            allTrips.forEach(u -&gt; u.getAllTravelers().size());</span>
+        }
+
+<span class="fc" id="L32">        return allTrips;</span>
+    }
+
+    public Long createTrip(
+            String title,
+            String description,
+            Long cost,
+            String locationName,
+            LocalDate departureDate,
+            LocalDate returnDate
+    ) {
+<span class="fc" id="L43">        Trip trip = new Trip();</span>
+
+<span class="fc" id="L45">        trip.setTitle(title);</span>
+<span class="fc" id="L46">        trip.setDescription(description);</span>
+<span class="fc" id="L47">        trip.setCost(cost);</span>
+<span class="fc" id="L48">        trip.setLocationName(locationName);</span>
+<span class="fc" id="L49">        trip.setDepartureDate(departureDate);</span>
+<span class="fc" id="L50">        trip.setReturnDate(returnDate);</span>
+
+<span class="fc" id="L52">        em.persist(trip);</span>
+
+<span class="fc" id="L54">        return trip.getId();</span>
+    }
+
+    public Trip getTrip(Long tripID, Boolean withTravelers) {
+<span class="fc" id="L58">        Trip trip = em.find(Trip.class, tripID);</span>
+
+<span class="fc bfc" id="L60" title="All 2 branches covered.">        if (trip == null) {</span>
+<span class="fc" id="L61">            throw new IllegalStateException(&quot;No such trip found&quot;);</span>
+        }
+
+<span class="pc bpc" id="L64" title="1 of 2 branches missed.">        if (withTravelers) {</span>
+<span class="fc" id="L65">            trip.getAllTravelers().size();</span>
+        }
+
+<span class="fc" id="L68">        return trip;</span>
+    }
+
+    public void deleteTrip(Long tripID) {
+<span class="fc" id="L72">        Trip tripToRemove = em.find(Trip.class, tripID);</span>
+
+<span class="pc bpc" id="L74" title="1 of 2 branches missed.">        if (tripToRemove == null) {</span>
+<span class="nc" id="L75">            throw new IllegalStateException(&quot;Trip not found in database&quot;);</span>
+        }
+
+<span class="fc" id="L78">        em.remove(tripToRemove);</span>
+<span class="fc" id="L79">    }</span>
+
+    public List&lt;Trip&gt; filterTripsByLocation(String locationName) {
+<span class="fc" id="L82">        TypedQuery&lt;Trip&gt; query = em.createQuery(</span>
+                &quot;SELECT t FROM Trip t WHERE t.locationName =?1 ORDER BY t.cost ASC&quot;, Trip.class
+        );
+
+<span class="fc" id="L86">        query.setParameter(1, locationName);</span>
+
+<span class="fc" id="L88">        return query.getResultList();</span>
+    }
+
+    public List&lt;Trip&gt; filterByCost(Long cost) {
+<span class="fc" id="L92">        TypedQuery&lt;Trip&gt; query = em.createQuery(</span>
+                &quot;SELECT t FROM Trip t WHERE t.cost =?1&quot;, Trip.class
+        );
+
+<span class="fc" id="L96">        query.setParameter(1, cost);</span>
+
+<span class="fc" id="L98">        return query.getResultList();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

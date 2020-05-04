@@ -1,0 +1,9 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+mock-exam-backend,travel.agency.backend.service,TripService,5,119,2,6,1,31,2,10,0,8
+mock-exam-backend,travel.agency.backend.service,UserService,22,53,4,2,6,13,4,2,1,2
+mock-exam-backend,travel.agency.backend.service,DefaultDataInitializerService,3,408,0,0,2,83,0,19,0,19
+mock-exam-backend,travel.agency.backend.service,PurchaseService,38,55,2,2,8,14,4,3,2,3
+mock-exam-backend,travel.agency.backend.entity,Trip,26,33,0,0,10,16,8,9,8,9
+mock-exam-backend,travel.agency.backend.entity,Purchase,13,18,0,0,5,9,4,5,4,5
+mock-exam-backend,travel.agency.backend.entity,Users,25,34,0,0,9,16,8,9,8,9
+mock-exam-backend,travel.agency.backend,PasswordConfig,0,7,0,0,0,2,0,2,0,2

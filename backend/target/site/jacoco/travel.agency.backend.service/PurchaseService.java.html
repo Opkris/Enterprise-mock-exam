@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="no"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PurchaseService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mock-exam-backend</a> &gt; <a href="index.source.html" class="el_package">travel.agency.backend.service</a> &gt; <span class="el_source">PurchaseService.java</span></div><h1>PurchaseService.java</h1><pre class="source lang-java linenums">package travel.agency.backend.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import travel.agency.backend.entity.Purchase;
+import travel.agency.backend.entity.Trip;
+import travel.agency.backend.entity.Users;
+
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.util.List;
+
+
+@Service
+@Transactional
+<span class="fc" id="L18">public class PurchaseService {</span>
+
+    @Autowired
+    private EntityManager em;
+
+    public List&lt;Purchase&gt; getAllPurchases(){
+<span class="fc" id="L24">        TypedQuery&lt;Purchase&gt; query = em.createQuery(&quot;SELECT p FROM Purchase p&quot;,Purchase.class);</span>
+<span class="fc" id="L25">        return query.getResultList();</span>
+    }
+
+    public List&lt;Purchase&gt; filterPurchasesByTrip(Long tripID) {
+<span class="nc" id="L29">        TypedQuery&lt;Purchase&gt; query = em.createQuery(</span>
+                &quot;SELECT p FROM Purchase p WHERE p.tripInformation.id =?1&quot;, Purchase.class);
+<span class="nc" id="L31">        query.setParameter(1, tripID);</span>
+
+        //It could be that here are no purchases but that is fine
+<span class="nc" id="L34">        return query.getResultList();</span>
+    }
+
+    public Long newPurchase(Long tripID, String userID) {
+<span class="fc" id="L38">        Trip trip = em.find(Trip.class, tripID);</span>
+<span class="fc" id="L39">        Users users = em.find(Users.class, userID);</span>
+
+<span class="pc bpc" id="L41" title="1 of 2 branches missed.">        if (trip == null) {</span>
+<span class="nc" id="L42">            throw new IllegalStateException(&quot;Trip not found&quot;);</span>
+        }
+<span class="pc bpc" id="L44" title="1 of 2 branches missed.">        if (users == null) {</span>
+<span class="nc" id="L45">            throw new IllegalStateException(&quot;User not found&quot;);</span>
+        }
+
+<span class="fc" id="L48">        Purchase purchase = new Purchase();</span>
+<span class="fc" id="L49">        purchase.setBookedBy(users);</span>
+<span class="fc" id="L50">        purchase.setDateOfBooking(LocalDate.now());</span>
+<span class="fc" id="L51">        purchase.setTripInformation(trip);</span>
+<span class="fc" id="L52">        users.getBookedTrips().add(trip);</span>
+<span class="fc" id="L53">        em.persist(purchase);</span>
+
+<span class="fc" id="L55">        return purchase.getId();</span>
+    }
+
+    //Could have remove purchase if I have time to implement it
+
+    public List&lt;Purchase&gt; filterPurchasesByUser(String userID) {
+<span class="nc" id="L61">        TypedQuery&lt;Purchase&gt; query = em.createQuery(</span>
+                &quot;SELECT p FROM Purchase p WHERE p.bookedBy.userID =?1&quot;, Purchase.class
+        );
+
+<span class="nc" id="L65">        query.setParameter(1, userID);</span>
+
+<span class="nc" id="L67">        return query.getResultList();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
